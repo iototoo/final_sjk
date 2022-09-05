@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block contents %}
+<div id="login">
+    <div class="container">
+        <div id="login-row" class="row justify-content-center align-items-center">
+            <div id="login-column" class="col-md-4">
+                <div id="login-box" class="col-md-12">
+                    <form id="login-form" class="form" action="{% url 'login' %}" method="post">
+                        {% csrf_token %}
+                        <h2 class="text-center text-info">Login</h2>
+                        
+                        <div class="form-group">
+                            <label for="username" class="text-info">User ID:</label><br>
+                            {% if form.username.errors %}
+                                {% for error in form.username.errors %}
+                                    <p class="m-0" style="color: red;"> {{ error }} <p>
+                                {% endfor %}
+                            {% endif %}
+                            {{ form.username }}
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="password" class="text-info">Password:</label><br>
+                            {% if form.username.errors %}
+                                {% for error in form.password.errors %}
+                                    <p class="m-0" style="color: red;"> {{ error }} <p>
+                                {% endfor %}
+                            {% endif %}
+                            {{ form.password }}
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" name="submit" class="btn btn-info btn-md" value="로그인">
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(246, 246, 246);
+  height: 100vh;
+}
+#login .container #login-row #login-column #login-box {
+  margin-top: 100px;
+  max-width: 500px;
+  height: 400px;
+}
+#login .container #login-row #login-column #login-box #login-form {
+  padding: 20px;
+}
+#login .container #login-row #login-column #login-box #login-form #register-link {
+  margin-top: -85px;
+}
+
+{% endblock %}
+

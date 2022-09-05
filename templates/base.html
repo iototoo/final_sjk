@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="icon" href="../../favicon.ico" />
+    <title>{% block title %}파이널 프로젝트{% endblock %}</title>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    />
+
+    {% block extra-style %}{% endblock %}
+  </head>
+
+  <body>
+    <!-- 출처: https://bootsnipp.com/snippets/bxzmb -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+      <a class="navbar-brand" href="#">파이널프로젝트</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="{% url 'index' %}"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'user_list' %}">Users</a>
+          </li>
+        </ul>
+        {% if user.is_authenticated %}
+        <span style="color: lightgray">{{user.username}}</span>
+        <a
+          class="nav-item nav-link"
+          href="{% url 'logout' %}"
+          style="color: white"
+          >로그아웃 <i class="fas fa-sign-out-alt"></i>
+        </a>
+        {% else %}
+        <a
+          class="nav-item nav-link"
+          href="{% url 'login' %}"
+          style="color: white"
+          >로그인 <i class="fas fa-sign-in-alt"></i>
+        </a>
+        <a
+          class="nav-item nav-link"
+          href="{% url 'register' %}"
+          style="color: white"
+          >회원가입 <i class="fas fa-user-plus"></i>
+        </a>
+        {% endif %}
+      </div>
+    </nav>
+
+    {% block contents %}{% endblock %}
+
+    <!-- footer -->
+    {% block footer %}{% endblock %}
+
+    <script>
+      $(document).ready(function () {
+        $("li.active").removeClass("active").removeAttr("aria-current");
+        $('a[href="' + location.pathname + '"]')
+          .closest("li")
+          .addClass("active")
+          .attr("aria-current", "page");
+      });
+    </script>
+
+    {% block extra-script %}{% endblock %}
+  </body>
+</html>

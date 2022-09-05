@@ -1,0 +1,20 @@
+{% extends "base.html" %} {% load static %} {% block contents %}
+<div id="container">
+  {% comment %} TODO: 4. /index 페이지에는 로그인 한 유저 이름을 출력해야
+  합니다. ex) hello, 홍길동 {% endcomment %}
+  <div class="col-lg-2">
+    {% if user.is_authenticated %}
+    <h1 style="color: black">Hello, {{ user.username }}</h1>
+    {% else %}
+    <h1 style="color: black">Hello,</h1>
+    {% endif %}
+  </div>
+</div>
+<style>
+  #container {
+    background: url("/static/images/image20220902.jpg") scroll;
+    background-size: cover;
+    min-height: 900px;
+  }
+</style>
+{% endblock %}
